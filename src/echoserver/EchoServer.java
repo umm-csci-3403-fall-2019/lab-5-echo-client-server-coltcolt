@@ -20,9 +20,15 @@ public class EchoServer {
                 // Construct a writer so we can write to the socket, thereby
                 // sending something back to the client.
                 PrintWriter writer = new PrintWriter(client.getOutputStream(), true);
+                OutputStream out = client.getOutputStream();
+
+                while((System.in.read()) != -1){
+                    System.out.println("5");
+                }
+
 
                 // Send the current date back tothe client.
-                writer.println(new java.util.Date().toString());
+                //writer.println("bing bang bong!");
 
                 // Close the client socket since we're done.
                 client.close();
