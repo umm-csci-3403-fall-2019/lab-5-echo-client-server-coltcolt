@@ -17,20 +17,24 @@ public class EchoServer {
                 Socket client = sock.accept();
                 System.out.println("Got a request!");
 
+
+
                 // Construct a writer so we can write to the socket, thereby
                 // sending something back to the client.
-                PrintWriter writer = new PrintWriter(client.getOutputStream(), true);
-                OutputStream publisher = client.getOutputStream();
+                OutputStream output = client.getOutputStream();
+                InputStream input = client.getInputStream();
 
-                //while((System.in.read()) != -1){
-               // }
+                while(1==1) { //do always, this is a server
+                    int request = client.getInputStream().read(); //get the request from client's input
+                    if (request != -1) { //if the request is readable, print it to user
+                        output.write(request);
+                    }
+                    else { //if it isn't, don't, and get rid of buffer
+                        output.flush();
+                        break;
+                    }
+                }
 
-                writer.println("work, dernit");
-
-
-
-                // Send the current date back tothe client.
-                //writer.println("bing bang bong!");
 
                 // Close the client socket since we're done.
                 client.close();

@@ -17,15 +17,16 @@ public class EchoClient {
         try {
             // Connect to the server
             Socket socket = new Socket(server, portNumber);
-
+            int thebyte; //byte wasn't allowed ;(
             // Get the input stream so we can read from that socket
             InputStream input = socket.getInputStream();
+            OutputStream output = socket.getOutputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
             // Print all the input we receive from the server
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+            while ((thebyte = System.in.read()) != -1) {
+                output.write(thebyte);
+                System.out.write(input.read());
             }
 
             // Close the socket when we're done reading from it
